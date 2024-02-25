@@ -26,8 +26,8 @@ try{
     const payLoad =
     {
         email:user.email,
-        id:user._id
-
+        id:user._id,
+        isAdmin:user.isAdmin
     } 
 
     if(await bcrypt.compare(password,user.password))
