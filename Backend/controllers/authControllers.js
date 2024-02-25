@@ -36,7 +36,7 @@ try{
                                process.env.JWT_SECRET,
                                {expiresIn:"2h"})
         const {password,...userdata} = user._doc;
-        const options={expires: new Date(Date.now() + 2*24*60*60*1000),
+        const options={expires: new Date(Date.now() + 2*60*60*1000),
                         httpOnly:true,}                       
             resp.cookie("web_token",token,options);
             return resp.status(200).json({
@@ -129,4 +129,23 @@ const signupController = async(req,resp)=>{
     }
 }
 
-module.exports = {signinController,signupController}
+const signoutController =  async(req,resp)=>{
+    try{
+        resp.clearCookie('web_token').status(200).json({
+            success:true,
+            msg:"User Has Been SignOut"
+        })
+    }catch(err)
+    {
+        return resp.status(400).json({
+            success:false,
+            msg:"Error While SignOut",
+            error:err
+
+        })
+    }
+}
+
+
+
+module.exports = {signinController,signupController,signoutController}

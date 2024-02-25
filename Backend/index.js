@@ -4,10 +4,17 @@ const dotenv = require('dotenv')
 dotenv.config();
 const PORT = process.env.PORT || 3000
 const authRoutes = require('./routes/authRoutes')
+const userRoutes = require('./routes/userRoutes');
+const cookieParser = require('cookie-parser');
+
 app.use(express.json())
+app.use(cookieParser())
+
 
 //all routes 
 app.use('/api/auth',authRoutes)
+app.use('/api/user',userRoutes)
+
 
 app.use((err,req,resp,next)=>{
     const errcode = err.statusCode || 500;
