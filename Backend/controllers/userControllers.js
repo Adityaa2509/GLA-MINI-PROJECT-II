@@ -99,7 +99,25 @@ const deleteUser = async(req,resp)=>{
     }
 }
 
+const getUser = async(req,resp)=>{
+    try{
+        const user = await User.findById(req.params.userId)
+        if(!user)
+        return resp.status(404).json({
+            success:false,
+            msg:"User Not Found"                
+        })
+        const{password,...userinfo} = user._doc
+        return resp.status(200).json(userinfo)
+    }
+    catch(err)
+    {
+        return resp.status(400).json({
+            success:false,
+            msg:"Error while getting USER DETAIL "                
+        })
+    }
+}
 
-module.exports = {
-    updateUser,
-    deleteUser};
+
+module.exports = {updateUser, deleteUser, getUser};

@@ -26,8 +26,7 @@ const BlogSchema = mongoose.Schema({
       },
       slug: {
         type: String,
-        required: true,
-        unique: true,
+        required: true
       },
       comments: [{
         type: mongoose.Schema.Types.ObjectId,
