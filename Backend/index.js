@@ -2,11 +2,17 @@ const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
 dotenv.config();
-const PORT = process.env.PORT || 3000
+const PORT =  3000
+
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes');
 const BlogRoutes  = require('./routes/BlogRoutes')
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow requests from http://localhost:5173
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+}));
 
 app.use(express.json())
 app.use(cookieParser())
@@ -16,6 +22,7 @@ app.use(cookieParser())
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
 app.use('/api/blog',BlogRoutes)
+
 
 
 
